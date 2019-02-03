@@ -1,4 +1,3 @@
-using System;
 using Xunit;
 using StringExtensions;
 
@@ -6,16 +5,14 @@ namespace StringExtension.Tests
 {
     public class StringPatternExtensionTest
     {
-        [Fact]
-        public void ShouldDetemineIfMatchedWithThePattern()
+        [Theory]
+        [InlineData("/article/{id}", "/article/1", true)]
+        [InlineData("/article/{id}", "/article/1/comments", true)]
+        [InlineData("/article/{id}", "/articles/1/", false)]
+        [InlineData("/article/{id}/comments/{commentId}", "/article/1/comments/43", true)]
+        public void ShouldDetemineIfMatchedWithThePattern(string pattern, string value, bool expectedResult)
         {
-            var pattern = "Let's go to {place}";
-
-            var valueExpectedToBeMatched = "Let's go to Los Angeles";
-            Assert.True(valueExpectedToBeMatched.IsMatchedWith(pattern));
-
-            var valueExpectedToBeNotMatched = "We Should go to Los Angeles";
-            Assert.False(valueExpectedToBeNotMatched.IsMatchedWith(pattern));
+            Assert.Equal(expectedResult, value.IsMatchedWith(pattern));
         }
     }
 }
