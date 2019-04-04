@@ -3,7 +3,7 @@ using StringExtensions;
 
 namespace StringExtension.Tests
 {
-    public class StringPatternExtensionTest
+    public class StringPatternExtensionTests
     {
         [Theory]
         [InlineData("/article/{id}", "/article/1", true)]
